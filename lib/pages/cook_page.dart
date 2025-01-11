@@ -123,16 +123,16 @@ class _CookPageState extends State<CookPage> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         _buildResultCard(
-          'Foods',
-          _results['foods'].join(', '),
-        ),
-        _buildResultCard(
-          'Weights',
-          '${_results['food_weights'].join(', ')} grams',
+          'Ingredients',
+          List.generate(
+            _results['ingredients'].length,
+            (index) =>
+                '• ${_results['ingredients'][index]} (${_results['weights'][index]})',
+          ).join('\n'),
         ),
         _buildResultCard(
           'Nutrients',
-          'Calories, Protein, Fat: ${_results['needed_nutrients'].join(', ')}',
+          '• Calories: ${_results['nutrients'][0]}kcal\n• Protein: ${_results['nutrients'][1]}g\n• Fat: ${_results['nutrients'][2]}g',
         ),
         _buildResultCard(
           'Recipe',
