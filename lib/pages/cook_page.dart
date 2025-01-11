@@ -35,7 +35,8 @@ class _CookPageState extends State<CookPage> {
 
     try {
       final response = await http.get(
-        Uri.parse('http://192.168.1.13:5000/process?input=${Uri.encodeComponent(input)}'),
+        Uri.parse(
+            'http://192.168.1.13:5000/process?input=${Uri.encodeComponent(input)}'),
       );
 
       if (response.statusCode == 200) {
@@ -49,7 +50,9 @@ class _CookPageState extends State<CookPage> {
       }
     } catch (e) {
       setState(() {
-        _results = {"error": "Unable to connect to server. Please check your connection."};
+        _results = {
+          "error": "Unable to connect to server. Please check your connection."
+        };
       });
     } finally {
       setState(() {
