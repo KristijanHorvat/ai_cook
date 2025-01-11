@@ -160,17 +160,23 @@ class _CookPageState extends State<CookPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      TextField(
-                        controller: _controller,
-                        decoration: InputDecoration(
-                          labelText: "Enter your meal description",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
+                      AbsorbPointer(
+                        absorbing: _isLoading,
+                        child: Opacity(
+                          opacity: _isLoading ? 0.5 : 1,
+                          child: TextField(
+                            controller: _controller,
+                            decoration: InputDecoration(
+                              labelText: "Enter your meal description",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              filled: true,
+                              fillColor: Colors.grey.shade50,
+                            ),
+                            maxLines: 3,
                           ),
-                          filled: true,
-                          fillColor: Colors.grey.shade50,
                         ),
-                        maxLines: 3,
                       ),
                       const SizedBox(height: 16),
                       Row(
@@ -179,30 +185,37 @@ class _CookPageState extends State<CookPage> {
                             child: ElevatedButton(
                               onPressed: _isLoading ? null : _getResults,
                               style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(vertical: 16),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
                               child: _isLoading
                                   ? const SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ),
-                              )
+                                      height: 20,
+                                      width: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                      ),
+                                    )
                                   : const Text(
-                                "Get Recipe",
-                                style: TextStyle(fontSize: 16),
-                              ),
+                                      "Get Recipe",
+                                      style: TextStyle(fontSize: 16),
+                                    ),
                             ),
                           ),
                           const SizedBox(width: 12),
-                          IconButton(
-                            onPressed: _reset,
-                            icon: const Icon(Icons.refresh),
-                            tooltip: 'Reset',
+                          AbsorbPointer(
+                            absorbing: _isLoading,
+                            child: Opacity(
+                              opacity: _isLoading ? 0.5 : 1,
+                              child: IconButton(
+                                onPressed: _isLoading ? null : _reset,
+                                icon: const Icon(Icons.refresh),
+                                tooltip: 'Reset',
+                              ),
+                            ),
                           ),
                         ],
                       ),
