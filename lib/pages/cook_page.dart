@@ -23,6 +23,8 @@ class _CookPageState extends State<CookPage> {
   }
 
   Future<void> _getResults() async {
+    FocusManager.instance.primaryFocus?.unfocus();
+
     final input = _controller.text.trim();
     if (input.isEmpty) return;
 
