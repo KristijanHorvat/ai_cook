@@ -62,26 +62,31 @@ class _CookPageState extends State<CookPage> {
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
+        child: Container(
+          constraints: BoxConstraints(minWidth: double.infinity),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              content,
-              style: const TextStyle(
-                fontSize: 15,
-                color: Colors.black54,
+              const SizedBox(height: 8),
+              Text(
+                content,
+                style: const TextStyle(
+                  fontSize: 15,
+                  color: Colors.black54,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -93,25 +98,24 @@ class _CookPageState extends State<CookPage> {
     }
 
     if (_results.containsKey('error')) {
-      return Center(
-        child: Card(
-          color: Colors.red.shade50,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Text(
-              _results['error'],
-              style: TextStyle(
-                color: Colors.red.shade700,
-                fontSize: 16,
-              ),
+      return Card(
+        color: Colors.red.shade50,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Text(
+            _results['error'],
+            style: TextStyle(
+              color: Colors.red.shade700,
+              fontSize: 16,
             ),
           ),
         ),
       );
     }
 
-    return ListView(
-      shrinkWrap: true,
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         _buildResultCard(
           'Foods',
@@ -146,71 +150,74 @@ class _CookPageState extends State<CookPage> {
         foregroundColor: Colors.white,
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Card(
-                elevation: 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      TextField(
-                        controller: _controller,
-                        decoration: InputDecoration(
-                          labelText: "Enter your meal description",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Card(
+                  elevation: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        TextField(
+                          controller: _controller,
+                          decoration: InputDecoration(
+                            labelText: "Enter your meal description",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            filled: true,
+                            fillColor: Colors.grey.shade50,
                           ),
-                          filled: true,
-                          fillColor: Colors.grey.shade50,
+                          maxLines: 3,
                         ),
-                        maxLines: 3,
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: ElevatedButton(
-                              onPressed: _isLoading ? null : _getResults,
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(vertical: 16),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: _isLoading ? null : _getResults,
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
                                 ),
-                              ),
-                              child: _isLoading
-                                  ? const SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
+                                child: _isLoading
+                                    ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                                    : const Text(
+                                  "Get Recipe",
+                                  style: TextStyle(fontSize: 16),
                                 ),
-                              )
-                                  : const Text(
-                                "Get Recipe",
-                                style: TextStyle(fontSize: 16),
                               ),
                             ),
-                          ),
-                          const SizedBox(width: 12),
-                          IconButton(
-                            onPressed: _reset,
-                            icon: const Icon(Icons.refresh),
-                            tooltip: 'Reset',
-                          ),
-                        ],
-                      ),
-                    ],
+                            const SizedBox(width: 12),
+                            IconButton(
+                              onPressed: _reset,
+                              icon: const Icon(Icons.refresh),
+                              tooltip: 'Reset',
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              _buildResults(),
-            ],
+                const SizedBox(height: 16),
+                _buildResults(),
+              ],
+            ),
           ),
         ),
       ),
