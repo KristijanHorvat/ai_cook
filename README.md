@@ -69,13 +69,13 @@ cd ai_cook
 
 #### Step 2: Install Python Dependencies
 
-1. Create a virtual environment (recommended):
+1. Create a virtual environment (or use existing inside _backend_ and _db_):
 
    ```bash
    python -m venv venv
    source venv/bin/activate   # On Windows, use `venv\\Scripts\\activate`
    ```
-2. Install required Python libraries:
+2. Install required Python libraries (once in _backend_, once in _db_):
 
    ```bash
    pip install -r requirements.txt
@@ -150,22 +150,27 @@ The mobile application is built using Flutter. Follow these steps to set it up:
 1. Navigate to the Flutter project directory:
 
    ```bash
-   cd <flutter_project_directory>
+   cd mobile-app
    ```
 2. Install Flutter dependencies:
 
    ```bash
    flutter pub get
    ```
-3. Run the Flutter application:
+3. Build and Run the Flutter application:
 
+   ```bash
+   flutter build
+   ```
    ```bash
    flutter run
    ```
 
    > **Note**: Ensure that your emulator or physical device is properly set up and connected.
-   > **Note**: For iOS builds, run `pod install` in the `ios` directory before running the app. Run the app through Xcode.
-   >
+   > 
+   > **Note**: For iOS builds, run `flutter build ios` before running the app.
+   > 
+   > **Note**: If running iOS fails, try running the app with Xcode.
 
 ---
 
