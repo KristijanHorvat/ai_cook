@@ -1,7 +1,5 @@
 # AI Cook Assistant
 
----
-
 ## Project Overview
 
 **AI Cook Assistant** is a smart meal creation tool designed to help users prepare meals based on the ingredients they have and their dietary preferences.
