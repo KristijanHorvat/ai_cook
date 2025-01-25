@@ -11,6 +11,8 @@
 1. **Ingredient-Based Meal Suggestions**:
 
    - Users input available ingredients (e.g., chicken 250g, rice 100g, curry 50g) and desired nutritional targets (e.g., proteins, fats, and calories).
+     
+      > e.g. _For lunch, I have chicken, rice, and curry. The chicken is 200 grams, rice is 100 grams, and curry is 50 grams. I need 600 calories, 60 grams of protein and 20 grams of fat._
    - The assistant generates tailored meal ideas.
 2. **Recipe Generation**:
 
